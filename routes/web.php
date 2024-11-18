@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -8,30 +9,15 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/blogs', function () {
-    return view('blogs', [
-        'blogs' => Blog::all()
-    ]);
-});
+// Route::get('/blogs', [BlogController::class, 'index']);
 
-Route::get('/blogs/create', function () {
-    return view('create');
-});
+// Route::get('/blogs/create', [BlogController::class,'create']);
 
-Route::post('/blogs', function (Request $request) {
-    $validated = $request->validate([
-        'title' => 'required|unique:blogs|max:255',
-        'body' => 'required'
-    ]);
+// Route::post('/blogs', [BlogController::class,'store']);
 
-    Blog::create($validated);
+// Route::get('/blogs/{blog}', [BlogController::class,'show']);
 
-    return redirect('/blogs');
-});
-
-Route::get('/blogs/{blog}', function (Blog $blog) {
-    return view('blog', ['blog' => $blog]);
-});
+Route::resource('blogs', BlogController::class);
 
 Route::get('/contact', function () {
     return view('contact');

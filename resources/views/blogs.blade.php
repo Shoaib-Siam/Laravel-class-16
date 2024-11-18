@@ -1,6 +1,8 @@
 <x-layout>
     <x-slot:heading>
-        Blogs
+        <div class = "flex justify-between" >
+            <div> Blogs</div>
+            <x-nav-link href="/blogs/create" :active="true">Create New Post</x-nav-link>
     </x-slot:heading>
 
     <ul>
